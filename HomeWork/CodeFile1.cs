@@ -81,7 +81,7 @@ namespace HomeWork
                                     answer = true;
                                 }
                             }
-                            //break;
+                            break;
                         }
 
                     }
