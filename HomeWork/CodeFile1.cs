@@ -59,10 +59,16 @@ namespace HomeWork
                             answer = true;
                         }
 
-                        if(!answer)
+
+                    }
+
+                    for (int l = 0; l < answers[i].Length; l++)
+                    {
+
+                        if (!answer)
                         {
-                            int a = answers[i][j].Length - (answers[i][j].Length - 1);
-                            string tip = answers[i][j].Remove(a);
+                            int a = answers[i][l].Length - (answers[i][l].Length - 1);
+                            string tip = answers[i][l].Remove(a);
 
                             WriteLine($"Подсказка: ответ начинается с буквы \"{tip}\"");
                             WriteLine("Введите ещё раз ответ:");
@@ -75,13 +81,10 @@ namespace HomeWork
                                     answer = true;
                                 }
                             }
-                            break;
+                            //break;
                         }
 
-
-
                     }
-
 
                     if (answer)
                     {
