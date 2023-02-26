@@ -1,5 +1,6 @@
 ﻿//#define TASK1
-//#define TASK2
+#define TASK2
+//#define TASK3
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -195,6 +196,7 @@ namespace HomeWork3
 
 
 
+#if TASK3
             Shop s1 = new Shop("Березка", "ул. Пушкина", "Продажа водки", "56685 - 56695");
             s1.PrintInfo();
 
@@ -207,6 +209,7 @@ namespace HomeWork3
             s2.Phone = "8569 - 45236";
             s2.PrintInfo();
 
+#endif
 
         }
 
