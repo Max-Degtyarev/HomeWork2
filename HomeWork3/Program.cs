@@ -1,5 +1,5 @@
-﻿//#define TASK1
-#define TASK2
+﻿#define TASK1
+//#define TASK2
 //#define TASK3
 using Microsoft.Win32;
 using System;
@@ -139,9 +139,9 @@ namespace HomeWork3
         {
 
 #if TASK1
-            int number;
+            long number;
             WriteLine("Введите число: ");
-            number = int.Parse(ReadLine());
+            number = Int64.Parse(ReadLine());
 
             ispalindrom(number); 
 #endif
@@ -254,31 +254,32 @@ namespace HomeWork3
 
 
 
-        static void ispalindrom(int number)
+        static void ispalindrom(long number)
         {
 
 
             int numberLength = 0;
-            int copynumber1 = number;
+            long copynumber1 = number;
 
             for (; copynumber1 > 0; numberLength++)
             {
                 copynumber1 /= 10;
             }
 
-            int a;
-            int b;
+            long a;
+            long b;
             int variable = 1;
-            int copynumber2 = number;
+            long copynumber2 = number;
+            long copynumber3 = number;
 
             int i = 0;
 
-            for (; i < numberLength; i++)
+            for (; i < numberLength / 2; i++)
             {
-                a = copynumber2 / (int)Math.Pow(10, numberLength - variable);
-                b = number % 10;
+                a = (copynumber2 / (long)Math.Pow(10, numberLength - variable)) % 10;
+                b = copynumber3 % 10;
 
-                copynumber2 /= 10;
+                copynumber3 /= 10;
                 variable++;
 
                 if (a != b)
@@ -287,7 +288,7 @@ namespace HomeWork3
                     break;
                 }
             }
-            if (i == numberLength) WriteLine("Число палиндром");
+            if (i == numberLength / 2) WriteLine("Число палиндром");
 
 
         }
