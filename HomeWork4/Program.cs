@@ -13,142 +13,190 @@ namespace HomeWork4
     abstract class Device
     {
         protected string _name;
-        protected string _type;
+        protected int _power;
 
-        public Device(string name, string type)
+        public Device(string name, int power)
         {
             _name = name;
-            _type = type;
+            _power = power;
         }
 
         abstract public void Sound();
         abstract public void Show();
         abstract public void Desk();
 
-
-
-
     }
 
 
 
-    class Teapot : Device
+    abstract class Appliance : Device
     {
-
-        int _volume;
-
-        public Teapot(string name, string type, int volume): base(name, type)
+        protected int _volume;
+        
+        public Appliance(string name, int power, int volume):base(name, power)
         {
-
             _volume = volume;
+            
+        }
+    }
+
+
+    abstract class Transport : Device
+    {
+        protected int _maxspeed;
+        
+        public Transport(string name, int power, int maxspeed):base(name, power)
+        {
+            _maxspeed = maxspeed;
+
+        }
+
+    }
+
+
+    class Teapot : Appliance
+    {
+
+        string _case;
+
+        public Teapot(string name, int power, int volume, string casee): base(name, power, volume)
+        {
+            _case = casee;
 
         }
 
         public override void Sound()
         {
 
-            WriteLine("УУУУУУУУУУ\n");
+            WriteLine("Звук: УУУУУУУУУУ\n");
 
         }
         
         public override void Show()
         {
 
-            WriteLine($"Название: {_name}");
+            WriteLine($"Тип устройства: электрический чайник\nНазвание: {_name}");
 
         }
 
         public override void Desk()
         {
 
-            WriteLine($"{_type}: чайник объемом {_volume} литров");
+            WriteLine($"Основные характеристики:\nОбъем: {_volume} литров\nМощность: {_power} ватт\nМатерил корпуса: {_case}");
 
         }
+    
+    }
+
+
+    class Microwave : Appliance
+    {
+
+        string _country;
+
+        public Microwave(string name, int power, int volume, string country) : base(name, power, volume)
+        {
+
+            _country = country;
+
+        }
+
+        public override void Sound()
+        {
+           WriteLine("Звук: Ж-Ж-Ж-Ж-Ж-Ж-Ж-Ж-Ж-Ж\n");
+
+        }
+
+        public override void Show()
+        {
+
+            WriteLine($"Тип устройства: микроволновая печь\nНазвание: {_name}");
+
+        }
+
+        public override void Desk()
+        {
+
+            WriteLine($"Основные характеристики:\nОбъем: {_volume} литров\nМощность: {_power} ватт\nСтрана производства: {_country}");
+
+        }
+
+    }
+
+
+    class Car : Transport
+    {
+
+        string _color;
 
         
-
-    }
-
-
-
-    class Microwave : Device
-    {
-
-        int _power;
-
-        public Microwave(string name, string type, int power) : base(name, type)
+        public Car(string name, int power, int maxspeed, string color) : base(name, power, maxspeed)
         {
 
-            _power = power;
-
+            _color = color;
+           
         }
 
         public override void Sound()
         {
 
-            WriteLine("FFFFFFFFFFFFF\n");
+            WriteLine("Звук: ВЖУУУУХ\n");
 
         }
 
         public override void Show()
         {
 
-            WriteLine($"Название: {_name}");
+            WriteLine($"Тип устройства: автомобиль\nНазвание: {_name}");
 
         }
 
         public override void Desk()
         {
 
-            WriteLine($"{_type}: микроволновая печь мощностью {_power} ватт");
+            WriteLine($"Основные характеристики:\nМощность: {_power} лошадиных сил\nМаксимальная скорость: {_maxspeed} км/ч\nЦвет: {_color}");
 
         }
-
 
 
     }
 
 
-    class Car : Device
+
+    class Steamer : Transport
     {
 
-        int _power;
-        int _speed;
+        int _displacement;
 
-        public Car(string name, string type, int power, int speed) : base(name, type)
+        public Steamer(string name, int power, int maxspeed, int disp):base(name, power, maxspeed)
         {
 
-            _power = power;
-            _speed = speed; 
+            _displacement = disp;
+
         }
 
         public override void Sound()
         {
 
-            WriteLine("ЖЖЖЖЖЖЖЖЖЖЖЖЖЖ\n");
+            WriteLine("Звук: Ш-Ш-Ш-Ш-Ш-Ш-Ш-Ш-Ш-Ш-Ш-Ш-Ш-Ш\n");
 
         }
 
         public override void Show()
         {
 
-            WriteLine($"Название: {_name}");
+            WriteLine($"Тип устройства: Пароход\nНазвание: {_name}");
 
         }
 
         public override void Desk()
         {
 
-            WriteLine($"{_type}: автомобиль\nОсновные характеристики:\nМощность {_power} лошадиных сил\nМаксимальная скорость {_speed} км/ч");
+            WriteLine($"Основные характеристики:\nМощность: {_power} лошадиных сил\nМаксимальная скорость: {_maxspeed} узлов\nВодоизмещение: {_displacement} тонн");
 
         }
 
-
-
     }
-
-
-
 
     internal class Program
     {
@@ -158,20 +206,19 @@ namespace HomeWork4
             Device[] dev =
             {
 
-                new Teapot("Тефаль", "Техника для дома", 10),
-                new Microwave("Самсунг", "Техника для дома", 500),
-                new Car("Феррари", "Транспорт", 500, 300)
+                new Teapot("Тефаль", 300, 500, "Металл"),
+                new Microwave("Самсунг", 700, 500, "Китай"),
+                new Car("Феррари", 900, 350, "Синий"),
+                new Steamer("Князь Владимир", 3000, 25, 150000)
 
             };
 
 
 
-
-
             foreach(Device item in dev)
             {
-                item.Desk();
                 item.Show();
+                item.Desk();
                 item.Sound();
 
             }

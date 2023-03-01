@@ -1,5 +1,5 @@
-﻿#define TASK1
-//#define TASK2
+﻿//#define TASK1
+#define TASK2
 //#define TASK3
 using Microsoft.Win32;
 using System;
